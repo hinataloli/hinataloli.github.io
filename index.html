@@ -3,125 +3,60 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="Trang web bảo trì tạm thời">
-    <title>Trang Bảo Trì (EOE LLC)</title>
+    <title>Bảo Trì Hệ Thống</title>
     
     <style>
-        /* Đặt nội dung của file styles.css vào đây */
         body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        header {
-            background: #333;
-            color: #fff;
-            padding: 1em 0;
+            font-family: Arial, sans-serif;
             text-align: center;
+            padding: 50px 20px;
+            background-color: #f0f0f0;
+            color: #333;
         }
-
-        header h1 {
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        h1 {
+            color: #d9534f; /* Màu đỏ nổi bật */
+            font-size: 2em;
             margin-bottom: 0.5em;
         }
-
-        nav ul {
-            padding: 0;
-            list-style: none;
-            display: flex;
-            justify-content: center;
+        p {
+            font-size: 1.1em;
+            margin-bottom: 25px;
         }
-
-        nav ul li {
-            margin: 0 15px;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        main {
-            display: flex;
-            max-width: 1100px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        section {
-            flex: 3;
-            padding: 20px;
-            background: #fff;
-            margin-right: 20px;
+        img {
+            max-width: 100%; /* Đảm bảo ảnh không vượt quá kích thước khung */
+            height: auto;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            border: 1px solid #ccc;
         }
-
-        aside {
-            flex: 1;
-            padding: 20px;
-            background: #e6e6e6;
-            border-radius: 5px;
-        }
-
         footer {
-            text-align: center;
-            padding: 1em 0;
-            background: #333;
-            color: #fff;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-        
-        /* Cập nhật nội dung bảo trì nổi bật hơn */
-        .maintenance-message {
-            text-align: center;
-            padding: 50px 0;
-            font-size: 1.5em;
-            color: #d9534f;
-            font-weight: bold;
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.9em;
         }
     </style>
-
-    </head>
+</head>
 <body>
-    <header>
-        <h1>TRANG WEB ĐANG BẢO TRÌ</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Trang chủ</a></li>
-                <li><a href="#">Giới thiệu</a></li>
-                <li><a href="#">Liên hệ</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="container">
+        <h1>🛠️ THÔNG BÁO BẢO TRÌ HỆ THỐNG</h1>
+        
+        <p>Chúng tôi đang tiến hành bảo trì và nâng cấp. Trang web sẽ sớm hoạt động trở lại.</p>
+        <p>Xin lỗi vì sự bất tiện này!</p>
 
-    <main>
-        <section>
-            <h2>Thông báo</h2>
-            <div class="maintenance-message">
-                WEB ĐANG ĐƯỢC NÂNG CẤP VÀ BẢO TRÌ. VUI LÒNG QUAY LẠI SAU.
-            </div>
-        </section>
-
-        <aside>
-            <h3>Thanh bên</h3>
-            <p>Ghi chú hoặc liên kết phụ.</p>
-        </aside>
-    </main>
-
-    <footer>
-        <p>&copy; <span id="year"></span> EOE LLC</p>
-    </footer>
-
-    <script>
-        // Đặt nội dung của file script.js vào đây
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+        <img src="https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-6/513979030_745753314555674_3416094814856303637_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=4l5szGFlarYQ7kNvwGWyXJN&_nc_oc=Adk3XlC_gfn1h6qFQI8n1UYDyG8yX9ZRKWw1fF7bU-yYtJgK4gv1UjSuvwyZEi__WxHEdJRhVgFu9MfOhT_eMrCo&_nc_zt=23&_nc_ht=scontent.fhan15-1.fna&_nc_gid=zMhReELgvFaljjMJYli3GQ&oh=00_AffeZW5-Cwil4KxsU2kVLYwq9-3DNtZWPLNvwvX-KrZfew&oe=68F8264A" alt="Hình ảnh thông báo bảo trì">
+        
+        <footer>
+            <p>Liên hệ hỗ trợ: [Email hoặc Số điện thoại của bạn]</p>
+            <p>&copy; 2025 EOE LLC</p>
+        </footer>
+    </div>
 </body>
 </html>
