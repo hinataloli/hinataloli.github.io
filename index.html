@@ -1,71 +1,221 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Bảo Trì Hệ Thống</title>
-    
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px 20px;
-            background-color: #f0f0f0;
-            color: #333;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-        h1 {
-            color: #d9534f; /* Màu đỏ nổi bật */
-            font-size: 2em;
-            margin-bottom: 0.5em;
-        }
-        p {
-            font-size: 1.1em;
-            margin-bottom: 25px;
-        }
-        img {
-            max-width: 100%; /* Đảm bảo ảnh không vượt quá kích thước khung */
-            height: auto;
-            border-radius: 5px;
-            margin-top: 20px;
-            border: 1px solid #ccc;
-        }
-        footer {
-            margin-top: 30px;
-            color: #777;
-            font-size: 0.9em;
-        }
-        footer a {
-            color: #1877f2; /* Màu xanh Facebook */
-            text-decoration: none;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="referrer" content="no-referrer" />
+  <title>QTOJ – Thông báo cập nhật</title>
+
+  <!-- Inter font (official CDN) -->
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+
+  <style>
+    /* ===== Config ===== */
+    :root{
+      /* Đổi nền tại đây hoặc bằng ?bg=<link PNG> */
+      --bg: url("https://phongvu.vn/cong-nghe/wp-content/uploads/2025/02/hinh-nen-chill-84-1024x640.jpg");
+      --shift: 14px;                 /* cường độ parallax theo chuột */
+      --intro-duration: 2500ms;      /* ~2.5s intro */
+      --intro-fade: 420ms;           /* thời gian mờ dần */
+    }
+
+    /* Inter usage per official guidance */
+    :root{
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+                   "Noto Sans", "Liberation Sans", sans-serif;
+      font-feature-settings: 'liga' 1, 'calt' 1; /* Chrome ligature fix */
+    }
+    @supports (font-variation-settings: normal){
+      :root{ font-family: InterVariable, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+                          "Noto Sans", "Liberation Sans", sans-serif; }
+    }
+
+    /* ===== Base ===== */
+    *{ box-sizing: border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0; background:#000; color:#fff; overflow:hidden; /* KHÔNG CUỘN */
+    }
+
+    /* ===== Intro (1s) ===== */
+    .intro{
+      position: fixed; inset: 0; z-index: 9999;
+      display: grid; place-items:center;
+      background: radial-gradient(90% 70% at 50% 45%, rgba(0,0,0,.85), #000 70%);
+      opacity: 1; transition: opacity var(--intro-fade) ease;
+    }
+    .intro.hide{ opacity: 0; pointer-events:none; }
+    .intro-wrap{ position: relative; display:grid; place-items:center; }
+    .intro-ring{
+      position:absolute; inset:auto; width: min(42vmin, 280px); aspect-ratio:1/1; border-radius: 999px;
+      background: conic-gradient(from 180deg, #7AA2FF, #4DFFEA, #E6FF4F, #7AA2FF);
+      filter: blur(14px) brightness(.9); opacity:.35; animation: ring 1.15s ease both;
+    }
+    .intro-logo{
+      width: min(40vmin, 220px); height:auto; display:block;
+      object-fit: contain; image-rendering:auto; opacity:.98; filter: drop-shadow(0 6px 18px rgba(0,0,0,.45));
+      animation: pop var(--intro-duration) cubic-bezier(.2,.7,.2,1) both;
+    }
+    .intro-placeholder{
+      width: min(40vmin, 220px); aspect-ratio:1/1; border-radius: 18px;
+      display:grid; place-items:center; font-weight:800; letter-spacing:.4px; color:#0a0a0a;
+      background: linear-gradient(135deg, #e5e7eb, #f8fafc);
+      box-shadow: inset 0 0 0 2px rgba(0,0,0,.08), 0 12px 30px rgba(0,0,0,.35);
+      animation: pop var(--intro-duration) cubic-bezier(.2,.7,.2,1) both;
+    }
+    @keyframes pop{ from{ transform: scale(.94); filter: blur(2px); opacity:0; } to{ transform: scale(1); filter: blur(0); opacity:1; } }
+    @keyframes ring{ from{ transform: scale(.92); opacity:.15; } to{ transform: scale(1); opacity:.35; } }
+
+    /* ===== Stage & Parallax (không dùng cuộn) ===== */
+    .stage{
+      position:relative; height:100vh; display:grid; place-items:center; text-align:center; padding:3rem 1.5rem; isolation:isolate;
+      overflow:hidden; /* clip parallax to viewport to avoid stray scrollbars */
+    }
+    .bg{
+      position:absolute; inset:-2rem; z-index:-2; will-change: transform;
+      background-image: var(--bg); background-size: cover; background-position:center;
+      filter: saturate(1.05) contrast(1.05);
+      transform: translate3d(var(--px,0px), var(--py,0px), 0) scale(1.08);
+    }
+    .shade{ position:absolute; inset:0; z-index:-1; background: radial-gradient(85% 65% at 50% 40%, rgba(0,0,0,.15), rgba(0,0,0,.68) 60%, rgba(0,0,0,.86) 100%); }
+
+    /* ===== Content ===== */
+    .card{
+      max-width: 920px; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px; padding: 2.25rem 1.75rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    h1{ margin:0 0 .6rem 0; font-size: clamp(28px, 5vw, 52px); line-height: 1.12; letter-spacing: .2px; }
+    p{ margin:.25rem 0 0 0; font-size: clamp(16px, 2.6vw, 22px); opacity:.96; }
+    .hl{ display:inline-block; font-weight:800; letter-spacing:.3px; background: linear-gradient(90deg, #E6FF4F, #4DFFEA, #7AA2FF); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 0 22px rgba(122,162,255,.25); }
+    .contact{
+      margin-top: .9rem;
+      font-size: clamp(14px, 2vw, 18px);
+      opacity: .92;
+    }
+    .contact a{
+      color:#A5B4FC;
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(255,255,255,.35);
+    }
+    .contact a:hover{
+      opacity:1;
+      border-bottom-color: rgba(255,255,255,.6);
+    }
+
+    .hint{
+      position:fixed; left:50%; bottom:14px; transform:translateX(-50%);
+      font-size:12px; letter-spacing:.3px; color:#cbd5e1; opacity:.75;
+      padding:.35rem .6rem; background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.12); border-radius:999px; user-select:none;
+      pointer-events:none; /* avoid intercepting clicks */
+    }
+    /* Fallback when backdrop-filter is unsupported */
+    @supports not (backdrop-filter: blur(0.1px)) {
+      .card{
+        background: rgba(0,0,0,.55);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        border-color: rgba(255,255,255,.10);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .bg{ transform: translateZ(0) scale(1.05); }
+      .intro, .intro-logo, .intro-ring, .intro-placeholder{ animation: none !important; }
+      .intro{ transition: none; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🛠️ THÔNG BÁO BẢO TRÌ HỆ THỐNG</h1>
-        
-        <p>Chúng tôi đang tiến hành bảo trì và nâng cấp. Trang web sẽ sớm hoạt động trở lại.</p>
-        <p>Xin lỗi vì sự bất tiện này!</p>
-
-        <img src="hihi.jpg" alt="Hình ảnh thông báo bảo trì">
-        
-        <footer>
-            <p>Liên hệ hỗ trợ: <a href="https://www.facebook.com/monplayosu#" target="_blank">Facebook Monplay Osu</a></p>
-            <p>&copy; <span id="year"></span> EOE LLC</p>
-        </footer>
+  <!-- Intro 1s: hiển thị logo rồi mờ dần -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro-wrap">
+      <div class="intro-ring" aria-hidden="true"></div>
+      <!-- Nếu có ?logo=<link> sẽ dùng <img>; nếu không thì dùng khối placeholder "LOGO" -->
+      <img id="introLogoImg" class="intro-logo" alt="Logo" style="display:none" referrerpolicy="no-referrer" src="https://media.discordapp.net/attachments/1109417264899424347/1166807740841201684/Khong_Co_Tieu_e26_20231026013630.png?ex=68f335a3&is=68f1e423&hm=89c9f6282e1ca97a3dbe4e4fe5d370b279033bb7a6dd30b388b41d9d3fae86bd&=&format=webp&quality=lossless&width=967&height=967" />
+      <div id="introLogoPh" class="intro-placeholder">LOGO</div>
     </div>
-    
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+  </div>
+
+  <main class="stage" id="scene">
+    <div class="bg"></div>
+    <div class="shade"></div>
+
+    <section class="card" role="status" aria-live="polite">
+      <h1><span class="hl">QTOJ</span> đang trong quá trình cập nhật phiên bản 1.1</h1>
+      <p>Hẹn mọi người vào <strong>?!/11/2025</strong></p>
+      <p class="contact">Liên hệ Admin: <a href="https://www.facebook.com/monplayosu" target="_blank" rel="noopener">facebook.com/monplayosu</a></p>
+    </section>
+  </main>
+
+  <script>
+    // --- URL params: ?bg=<link>, ?logo=<link>, plus intro/fade overrides ---
+    (function(){
+      const params = new URLSearchParams(location.search);
+      const bg = params.get('bg');
+      const logo = params.get('logo');
+      if (bg) document.documentElement.style.setProperty('--bg', `url('${bg}')`);
+
+      const img = document.getElementById('introLogoImg');
+      const ph  = document.getElementById('introLogoPh');
+      const showImg = () => { img.style.display = 'block'; ph.style.display = 'none'; };
+      const showPh  = () => { ph.style.display = 'grid';  img.style.display = 'none'; };
+      img.addEventListener('load', showImg, { once: true });
+      img.addEventListener('error', showPh, { once: true });
+      if (logo) img.src = logo; // dùng link từ URL nếu có
+
+      // Optional: override intro/fade via URL (?intro=2500, ?fade=600)
+      const toMs = (v) => {
+        if (!v) return null;
+        v = String(v).trim();
+        if (/^\d+(?:\.\d+)?\s*s$/i.test(v)) return parseFloat(v) * 1000;
+        if (/^\d+(?:\.\d+)?\s*ms$/i.test(v)) return parseFloat(v);
+        if (/^\d+(?:\.\d+)?$/i.test(v)) return parseFloat(v);
+        return null;
+      };
+      const root = document.documentElement;
+      const introMs = toMs(params.get('intro'));
+      if (!Number.isNaN(introMs) && introMs > 0) root.style.setProperty('--intro-duration', introMs + 'ms');
+      const fadeMs = toMs(params.get('fade'));
+      if (!Number.isNaN(fadeMs) && fadeMs >= 0) root.style.setProperty('--intro-fade', fadeMs + 'ms');
+    })();
+
+    // --- Parallax theo chuột (không dùng cuộn) ---
+    (function(){
+      const root = document.documentElement;
+      const maxShift = parseFloat(getComputedStyle(root).getPropertyValue('--shift')) || 14;
+      const bg = document.querySelector('.bg');
+      function setShift(xRatio, yRatio){
+        const x = (xRatio - 0.5) * (maxShift * 2);
+        const y = (yRatio - 0.5) * (maxShift * 2);
+        bg.style.setProperty('--px', x.toFixed(2) + 'px');
+        bg.style.setProperty('--py', y.toFixed(2) + 'px');
+      }
+      window.addEventListener('mousemove', e => {
+        setShift(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
+      }, { passive:true });
+    })();
+
+    // --- Intro timing (~1s hiển thị + fade) ---
+    (function(){
+      const intro = document.getElementById('intro');
+      const root = document.documentElement;
+      const fade = parseFloat(getComputedStyle(root).getPropertyValue('--intro-fade')) || 420;
+      const show = parseFloat(getComputedStyle(root).getPropertyValue('--intro-duration')) || 1000;
+      let ended = false;
+      function endIntro(){ intro.classList.add('hide'); setTimeout(()=>{ intro.remove(); }, fade + 30); }
+      function safeEnd(){ if (ended) return; ended = true; endIntro(); }
+
+      // Start the timer as soon as DOM is ready (don't wait for images)
+      document.addEventListener('DOMContentLoaded', () => { setTimeout(safeEnd, show); });
+      // Also end right after full load in case DOMContentLoaded fires early
+      window.addEventListener('load', () => { setTimeout(safeEnd, 0); });
+      // Hard cap to avoid rare stuck states
+      setTimeout(safeEnd, show + 1500);
+    })();
+  </script>
 </body>
 </html>
