@@ -42,6 +42,11 @@
             color: #777;
             font-size: 0.9em;
         }
+        footer a {
+            color: #1877f2; /* Màu xanh Facebook */
+            text-decoration: none;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -51,12 +56,16 @@
         <p>Chúng tôi đang tiến hành bảo trì và nâng cấp. Trang web sẽ sớm hoạt động trở lại.</p>
         <p>Xin lỗi vì sự bất tiện này!</p>
 
-        <img src="https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-6/513979030_745753314555674_3416094814856303637_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=4l5szGFlarYQ7kNvwGWyXJN&_nc_oc=Adk3XlC_gfn1h6qFQI8n1UYDyG8yX9ZRKWw1fF7bU-yYtJgK4gv1UjSuvwyZEi__WxHEdJRhVgFu9MfOhT_eMrCo&_nc_zt=23&_nc_ht=scontent.fhan15-1.fna&_nc_gid=zMhReELgvFaljjMJYli3GQ&oh=00_AffeZW5-Cwil4KxsU2kVLYwq9-3DNtZWPLNvwvX-KrZfew&oe=68F8264A" alt="Hình ảnh thông báo bảo trì">
+        <img src="hihi.jpg" alt="Hình ảnh thông báo bảo trì">
         
         <footer>
-            <p>Liên hệ hỗ trợ: [Email hoặc Số điện thoại của bạn]</p>
-            <p>&copy; 2025 EOE LLC</p>
+            <p>Liên hệ hỗ trợ: <a href="https://www.facebook.com/monplayosu#" target="_blank">Facebook Monplay Osu</a></p>
+            <p>&copy; <span id="year"></span> EOE LLC</p>
         </footer>
     </div>
+    
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
