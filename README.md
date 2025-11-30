@@ -1,1 +1,4 @@
-https://www.mediafire.com/file/ssvvbowzcqjevor/Quan_Ly_Nhan_Su_CA.zip/file
+sudo mkdir -p /run/uwsgi
+sudo chown quangtrioj:quangtrioj /run/uwsgi
+sudo supervisorctl restart site
+sudo supervisorctl status site
